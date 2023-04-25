@@ -16,6 +16,21 @@ class PetsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "update" do
+    pet = Pet.first
+    patch "/pets/#{pet.id}.json", params: { name: "Updated name" }
+    assert_response 200
 
-  
+    data = JSON.parse(response.body)
+    assert_equal "Updated name", data["name"]
+  end
+
+  test "show" do
+    get "/pets/#{Pet.first.id}.json"
+    assert_response 200
+
+    data = JSON.parse(response.body)
+    assert_equal ["id", "name", "breed", "image_url", "created_at", "updated_at"], data.keys
+  end
+
 end
