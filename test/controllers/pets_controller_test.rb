@@ -33,4 +33,11 @@ class PetsControllerTest < ActionDispatch::IntegrationTest
     assert_equal ["id", "name", "breed", "image_url", "created_at", "updated_at"], data.keys
   end
 
+  test "destroy" do
+    assert_difference "Pet.count", -1 do
+      delete "/pets/#{Pet.first.id}.json"
+      assert_response 200
+    end
+  end
+
 end

@@ -31,4 +31,11 @@ class PetsController < ApplicationController
     render :show
   end
 
+  def destroy
+    @pet = Pet.find_by(id: params[:id])
+    @pet.destroy
+    render json: { message: "Pet was deleted" }
+  end
+
+
 end
