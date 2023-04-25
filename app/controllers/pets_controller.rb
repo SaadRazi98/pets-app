@@ -5,4 +5,13 @@ class PetsController < ApplicationController
     render :index
   end 
 
+  def create 
+    @pet = Pet.create(
+      name: params[:name],
+      breed: params[:breed],
+      image_url: params[:image_url],
+    )
+    render :show
+  end
+
 end
